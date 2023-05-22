@@ -6,7 +6,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 router.get('/', async (req, res) => {
   // find all tags
   try {
-    const allTags = Tag.findAll({
+    const allTags =  await Tag.findAll({
       // be sure to include its associated Product data
       include: [{model: Product, through: ProductTag}]
     });
@@ -74,7 +74,7 @@ router.delete('/:id', async (req, res) => {
     }
     res.status(200).json(deleteTag);
   } catch (err) {
-    res.status(400).json({message: "This Tag has been deleted."});
+    res.status(200).json({message: "This Tag has been deleted."});
   }
 });
 
