@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 });
 
 // get one product
-router.get('./:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   try {
     const singleProduct = await Product.findByPk(req.params.id, {
@@ -33,6 +33,8 @@ router.get('./:id', async (req, res) => {
       res.status(404).json({message: "No product with that ID exists."})
       return;
     }
+
+    res.status(200).json(singleProduct);
   } catch (err) {
     res.status(400).json(err);
   }
